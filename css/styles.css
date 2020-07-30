@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body,
+html {
+  background-color: #fff;
+  color: #333;
+  font-family: "Arial", sans-serif;
+  min-height: 100%;
+  text-align: center;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+header .title {
+  padding: 2px;
+}
+
+main {
+  margin: 14px auto;
+}
+main div {
+  margin: 14px auto;
+}
+main div input[type=text] {
+  font-family: "Arial", sans-serif;
+  font-size: 16px;
+  max-width: 100px;
+  text-align: center;
+}
+main div button {
+  font-family: "Arial", sans-serif;
+  font-size: 16px;
+}
+main #kanaDisplay {
+  border: 1px solid;
+  display: inline-block;
+  font-size: 42px;
+}
+
+footer {
+  margin: 50px auto;
+  font-size: 14px;
+}
+
+/*# sourceMappingURL=styles.css.map */

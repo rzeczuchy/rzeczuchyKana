@@ -2,6 +2,10 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <title>rzeczuchyKana</title>
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
@@ -9,15 +13,24 @@
 
   <body>
     <header>
-      <img src="favicon.ico" alt="icon" /><span>rzeczuchyKana</span>
+      <img src="favicon.ico" alt="icon" />
+      <span class="title">rzeczuchyKana</span>
     </header>
     <main>
-      <div id="kanaDisplay">あ</div>
-      <p>The above is read as:</p>
-      <input id="answer" type="text" />
-      <button type="button" name="check" onclick="checkAnswer()">Check</button>
-      <div id="feedback">Click submit to check.</div>
-      <button type="button" name="next" onclick="reset()">Next</button>
+      <div>
+        <span id="kanaDisplay">あ</span>
+      </div>
+      <div>
+        <p>The above is read as:</p>
+        <input id="answer" type="text" />
+        <button type="button" name="check" onclick="checkAnswer()">
+          Check
+        </button>
+      </div>
+      <div id="feedback">Check answer.</div>
+      <div>
+        <button type="button" name="next" onclick="reset()">Next</button>
+      </div>
     </main>
     <footer>
       <p>

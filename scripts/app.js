@@ -28,7 +28,7 @@ var initialize = function () {
 var reset = function () {
     attempts = 0;
     answer.value = "";
-    feedback.innerHTML = "Click submit to check.";
+    feedback.innerHTML = "Check answer.";
     displayRandom();
 };
 var checkAnswer = function () {

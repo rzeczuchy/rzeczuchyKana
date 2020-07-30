@@ -41,7 +41,7 @@ const initialize = (): void => {
 const reset = (): void => {
   attempts = 0;
   answer.value = "";
-  feedback.innerHTML = "Click submit to check.";
+  feedback.innerHTML = "Check answer.";
   displayRandom();
 };
 
