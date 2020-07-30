@@ -10,11 +10,11 @@
   <body>
     <main>
       <div id="kanaDisplay">あ</div>
-      <form id="kanaForm">
-        <label for="answer">This kana is read as:</label>
-        <input id="answer" type="text" name="answer" value="" />
-        <input type="submit" value="Submit" />
-      </form>
+      <p>The above is read as:</p>
+      <input id="answer" type="text" />
+      <button type="button" name="check" onclick="checkAnswer()">Check</button>
+      <div id="feedback">Click submit to check.</div>
+      <button type="button" name="next" onclick="reset()">Next</button>
     </main>
     <footer>
       <p>
