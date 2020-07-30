@@ -41,7 +41,7 @@ var reset = function () {
 var checkAnswer = function () {
     if (answer.value != "") {
         attempts++;
-        if (displayedSyllable.romaji == answer.value) {
+        if (displayedSyllable.romaji == answer.value.toLowerCase()) {
             feedback.innerHTML = "Correct!";
             next.focus();
         }

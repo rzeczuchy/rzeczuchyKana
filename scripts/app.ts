@@ -58,7 +58,7 @@ const checkAnswer = (): void => {
   if (answer.value != "") {
     attempts++;
 
-    if (displayedSyllable.romaji == answer.value) {
+    if (displayedSyllable.romaji == answer.value.toLowerCase()) {
       feedback.innerHTML = "Correct!";
       next.focus();
     } else if (attempts < 2) {
