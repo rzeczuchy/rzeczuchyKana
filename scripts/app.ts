@@ -10,6 +10,9 @@ const answer: HTMLTextAreaElement = <HTMLTextAreaElement>(
 const feedback: HTMLDivElement = <HTMLDivElement>(
   document.getElementById("feedback")
 );
+const next: HTMLButtonElement = <HTMLButtonElement>(
+  document.getElementById("next")
+);
 let hiragana: Syllable[];
 let katakana: Syllable[];
 let displayedSyllable: Syllable;
@@ -18,6 +21,11 @@ let attempts: number;
 // EVENTS
 window.onload = (): void => {
   initialize();
+};
+answer.onkeyup = (e: KeyboardEvent): void => {
+  if (e.key == "Enter") {
+    checkAnswer();
+  }
 };
 
 // CLASSES
@@ -43,18 +51,23 @@ const reset = (): void => {
   answer.value = "";
   feedback.innerHTML = "Check answer.";
   displayRandom();
+  answer.focus();
 };
 
 const checkAnswer = (): void => {
-  attempts++;
+  if (answer.value != "") {
+    attempts++;
 
-  if (displayedSyllable.romaji == answer.value) {
-    feedback.innerHTML = "Correct!";
-  } else if (attempts < 3) {
-    feedback.innerHTML = "Wrong - try again!";
-  } else {
-    feedback.innerHTML =
-      "Wrong - correct answer is [" + displayedSyllable.romaji + "].";
+    if (displayedSyllable.romaji == answer.value) {
+      feedback.innerHTML = "Correct!";
+      next.focus();
+    } else if (attempts < 2) {
+      feedback.innerHTML = "Wrong - try again!";
+    } else {
+      feedback.innerHTML =
+        "Wrong - correct answer is [" + displayedSyllable.romaji + "].";
+      next.focus();
+    }
   }
 };
 

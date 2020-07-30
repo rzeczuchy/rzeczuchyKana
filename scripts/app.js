@@ -3,6 +3,7 @@
 var kanaDisplay = (document.getElementById("kanaDisplay"));
 var answer = (document.getElementById("answer"));
 var feedback = (document.getElementById("feedback"));
+var next = (document.getElementById("next"));
 var hiragana;
 var katakana;
 var displayedSyllable;
@@ -10,6 +11,11 @@ var attempts;
 // EVENTS
 window.onload = function () {
     initialize();
+};
+answer.onkeyup = function (e) {
+    if (e.key == "Enter") {
+        checkAnswer();
+    }
 };
 // CLASSES
 var Syllable = /** @class */ (function () {
@@ -30,18 +36,23 @@ var reset = function () {
     answer.value = "";
     feedback.innerHTML = "Check answer.";
     displayRandom();
+    answer.focus();
 };
 var checkAnswer = function () {
-    attempts++;
-    if (displayedSyllable.romaji == answer.value) {
-        feedback.innerHTML = "Correct!";
-    }
-    else if (attempts < 3) {
-        feedback.innerHTML = "Wrong - try again!";
-    }
-    else {
-        feedback.innerHTML =
-            "Wrong - correct answer is [" + displayedSyllable.romaji + "].";
+    if (answer.value != "") {
+        attempts++;
+        if (displayedSyllable.romaji == answer.value) {
+            feedback.innerHTML = "Correct!";
+            next.focus();
+        }
+        else if (attempts < 2) {
+            feedback.innerHTML = "Wrong - try again!";
+        }
+        else {
+            feedback.innerHTML =
+                "Wrong - correct answer is [" + displayedSyllable.romaji + "].";
+            next.focus();
+        }
     }
 };
 var displayRandom = function () {
