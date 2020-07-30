@@ -14,9 +14,10 @@ html {
 }
 
 header {
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: center;
+  margin: 14px auto;
 }
 header .title {
   padding: 2px;
