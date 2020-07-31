@@ -13,8 +13,7 @@ const feedback: HTMLDivElement = <HTMLDivElement>(
 const next: HTMLButtonElement = <HTMLButtonElement>(
   document.getElementById("next")
 );
-let hiragana: Syllable[];
-let katakana: Syllable[];
+let syllables: Syllable[] = [];
 let displayedSyllable: Syllable;
 let attempts: number;
 
@@ -41,8 +40,10 @@ class Syllable {
 
 // FUNCTIONS
 const initialize = (): void => {
-  populateHiragana();
-  populateKatakana();
+  addHiragana();
+  addHiraganaDakuten();
+  addKatakana();
+  addKatakanaDakuten();
   reset();
 };
 
@@ -80,18 +81,11 @@ const displayRandom = (): void => {
 };
 
 const getRandomSyllable = (): Syllable => {
-  switch (randomNumber(0, 1)) {
-    case 0:
-      return hiragana[randomNumber(0, hiragana.length - 1)];
-    case 1:
-      return katakana[randomNumber(0, katakana.length - 1)];
-    default:
-      return null;
-  }
+  return syllables[randomNumber(0, syllables.length - 1)];
 };
 
-const populateHiragana = (): void => {
-  hiragana = [
+const addHiragana = (): void => {
+  const hiragana: Syllable[] = [
     new Syllable("あ", "a"),
     new Syllable("い", "i"),
     new Syllable("う", "u"),
@@ -141,10 +135,42 @@ const populateHiragana = (): void => {
     new Syllable("を", "wo"),
     new Syllable("ん", "n"),
   ];
+  syllables = syllables.concat(hiragana);
 };
 
-const populateKatakana = (): void => {
-  katakana = [
+const addHiraganaDakuten = (): void => {
+  const hiraganaDakuten: Syllable[] = [
+    new Syllable("が", "ga"),
+    new Syllable("ぎ", "gi"),
+    new Syllable("ぐ", "gu"),
+    new Syllable("げ", "ge"),
+    new Syllable("ご", "go"),
+    new Syllable("ざ", "za"),
+    new Syllable("じ", "ji"),
+    new Syllable("ず", "zu"),
+    new Syllable("ぜ", "ze"),
+    new Syllable("ぞ", "zo"),
+    new Syllable("だ", "da"),
+    new Syllable("ぢ", "ji"),
+    new Syllable("づ", "dzu"),
+    new Syllable("で", "de"),
+    new Syllable("ど", "do"),
+    new Syllable("ば", "ba"),
+    new Syllable("び", "bi"),
+    new Syllable("ぶ", "bu"),
+    new Syllable("べ", "be"),
+    new Syllable("ぼ", "bo"),
+    new Syllable("ぱ", "pa"),
+    new Syllable("ぴ", "pi"),
+    new Syllable("ぷ", "pu"),
+    new Syllable("ぺ", "pe"),
+    new Syllable("ぽ", "po"),
+  ];
+  syllables = syllables.concat(hiraganaDakuten);
+};
+
+const addKatakana = (): void => {
+  const katakana: Syllable[] = [
     new Syllable("ア", "a"),
     new Syllable("イ", "i"),
     new Syllable("ウ", "u"),
@@ -194,6 +220,38 @@ const populateKatakana = (): void => {
     new Syllable("ヲ", "wo"),
     new Syllable("ン", "n"),
   ];
+  syllables = syllables.concat(katakana);
+};
+
+const addKatakanaDakuten = (): void => {
+  const katakanaDakuten: Syllable[] = [
+    new Syllable("ガ", "ga"),
+    new Syllable("ギ", "gi"),
+    new Syllable("グ", "gu"),
+    new Syllable("ゲ", "ge"),
+    new Syllable("ゴ", "go"),
+    new Syllable("ザ", "za"),
+    new Syllable("ジ", "ji"),
+    new Syllable("ズ", "zu"),
+    new Syllable("ゼ", "ze"),
+    new Syllable("ゾ", "zo"),
+    new Syllable("ダ", "da"),
+    new Syllable("ヂ", "ji"),
+    new Syllable("ヅ", "dzu"),
+    new Syllable("デ", "de"),
+    new Syllable("ヂ", "do"),
+    new Syllable("バ", "ba"),
+    new Syllable("ビ", "bi"),
+    new Syllable("ブ", "bu"),
+    new Syllable("ベ", "be"),
+    new Syllable("ボ", "bo"),
+    new Syllable("パ", "pa"),
+    new Syllable("ピ", "pi"),
+    new Syllable("プ", "pu"),
+    new Syllable("ペ", "pe"),
+    new Syllable("ポ", "po"),
+  ];
+  syllables = syllables.concat(katakanaDakuten);
 };
 
 const randomNumber = (min, max) => {
