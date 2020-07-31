@@ -28,8 +28,10 @@ var Syllable = /** @class */ (function () {
 var initialize = function () {
     addHiragana();
     addHiraganaDakuten();
+    addHiraganaDigraphs();
     addKatakana();
     addKatakanaDakuten();
+    addKatakanaDigraphs();
     reset();
 };
 var reset = function () {
@@ -148,6 +150,47 @@ var addHiraganaDakuten = function () {
     ];
     syllables = syllables.concat(hiraganaDakuten);
 };
+var addHiraganaDigraphs = function () {
+    var hiraganaDigraphs = [
+        new Syllable("きゃ", "kya"),
+        new Syllable("きゅ", "kyu"),
+        new Syllable("きょ", "kyo"),
+        new Syllable("しゃ", "sha"),
+        new Syllable("しゅ", "shu"),
+        new Syllable("しょ", "sho"),
+        new Syllable("ちゃ", "cha"),
+        new Syllable("ちゅ", "chu"),
+        new Syllable("ちょ", "cho"),
+        new Syllable("にゃ", "nya"),
+        new Syllable("にゅ", "nyu"),
+        new Syllable("にょ", "nyo"),
+        new Syllable("ひゃ", "hya"),
+        new Syllable("ひゅ", "hyu"),
+        new Syllable("ひょ", "hyo"),
+        new Syllable("みゃ", "mya"),
+        new Syllable("みゅ", "myu"),
+        new Syllable("みょ", "myo"),
+        new Syllable("りゃ", "rya"),
+        new Syllable("りゅ", "ryu"),
+        new Syllable("りょ", "ryo"),
+        new Syllable("ぎゃ", "gya"),
+        new Syllable("ぎゅ", "gyu"),
+        new Syllable("ぎょ", "gyo"),
+        new Syllable("じゃ", "ja"),
+        new Syllable("じゅ", "ju"),
+        new Syllable("じょ", "jo"),
+        new Syllable("ぢゃ", "ja"),
+        new Syllable("ぢゅ", "ju"),
+        new Syllable("ぢょ", "jo"),
+        new Syllable("びゃ", "bya"),
+        new Syllable("びゅ", "byu"),
+        new Syllable("びょ", "byo"),
+        new Syllable("ぴゃ", "pya"),
+        new Syllable("ぴゅ", "pyu"),
+        new Syllable("ぴょ", "pyo"),
+    ];
+    syllables = syllables.concat(hiraganaDigraphs);
+};
 var addKatakana = function () {
     var katakana = [
         new Syllable("ア", "a"),
@@ -230,6 +273,47 @@ var addKatakanaDakuten = function () {
         new Syllable("ポ", "po"),
     ];
     syllables = syllables.concat(katakanaDakuten);
+};
+var addKatakanaDigraphs = function () {
+    var katakanaDigraphs = [
+        new Syllable("キャ", "kya"),
+        new Syllable("キュ", "kyu"),
+        new Syllable("キョ", "kyo"),
+        new Syllable("シャ", "sha"),
+        new Syllable("シュ", "shu"),
+        new Syllable("ショ", "sho"),
+        new Syllable("チャ", "cha"),
+        new Syllable("チュ", "chu"),
+        new Syllable("チョ", "cho"),
+        new Syllable("ニャ", "nya"),
+        new Syllable("ニュ", "nyu"),
+        new Syllable("ニョ", "nyo"),
+        new Syllable("ヒャ", "hya"),
+        new Syllable("ヒュ", "hyu"),
+        new Syllable("ヒョ", "hyo"),
+        new Syllable("ミャ", "mya"),
+        new Syllable("ミュ", "myu"),
+        new Syllable("ミョ", "myo"),
+        new Syllable("リャ", "rya"),
+        new Syllable("リュ", "ryu"),
+        new Syllable("リョ", "ryo"),
+        new Syllable("ギャ", "gya"),
+        new Syllable("ギュ", "gyu"),
+        new Syllable("ギョ", "gyo"),
+        new Syllable("ジャ", "ja"),
+        new Syllable("ジュ", "ju"),
+        new Syllable("ジョ", "jo"),
+        new Syllable("ヂャ", "ja"),
+        new Syllable("ヂュ", "ju"),
+        new Syllable("ヂョ", "jo"),
+        new Syllable("ビャ", "bya"),
+        new Syllable("ビュ", "byu"),
+        new Syllable("ビョ", "byo"),
+        new Syllable("ピャ", "pya"),
+        new Syllable("ピュ", "pyu"),
+        new Syllable("ピョ", "pyo"),
+    ];
+    syllables = syllables.concat(katakanaDigraphs);
 };
 var randomNumber = function (min, max) {
     return Math.floor(Math.random() * (+max + 1 - +min) + +min);
