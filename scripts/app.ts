@@ -13,7 +13,26 @@ const feedback: HTMLDivElement = <HTMLDivElement>(
 const next: HTMLButtonElement = <HTMLButtonElement>(
   document.getElementById("next")
 );
-let syllables: Syllable[] = [];
+const hiraganaCheck: HTMLInputElement = <HTMLInputElement>(
+  document.getElementById("hiraganaCheck")
+);
+const katakanaCheck: HTMLInputElement = <HTMLInputElement>(
+  document.getElementById("katakanaCheck")
+);
+const dakutenCheck: HTMLInputElement = <HTMLInputElement>(
+  document.getElementById("dakutenCheck")
+);
+const digraphCheck: HTMLInputElement = <HTMLInputElement>(
+  document.getElementById("digraphCheck")
+);
+let hiragana: Syllable[] = [];
+let hiraganaDakuten: Syllable[] = [];
+let hiraganaDigraphs: Syllable[] = [];
+let hiraganaDakutenDigraphs: Syllable[] = [];
+let katakana: Syllable[] = [];
+let katakanaDakuten: Syllable[] = [];
+let katakanaDigraphs: Syllable[] = [];
+let katakanaDakutenDigraphs: Syllable[] = [];
 let displayedSyllable: Syllable;
 let attempts: number;
 
@@ -40,12 +59,19 @@ class Syllable {
 
 // FUNCTIONS
 const initialize = (): void => {
+  hiraganaCheck.checked = true;
+  dakutenCheck.checked = true;
+  digraphCheck.checked = true;
+
   addHiragana();
   addHiraganaDakuten();
   addHiraganaDigraphs();
+  addHiraganaDakutenDigraphs();
   addKatakana();
   addKatakanaDakuten();
   addKatakanaDigraphs();
+  addKatakanaDakutenDigraphs();
+
   reset();
 };
 
@@ -58,7 +84,7 @@ const reset = (): void => {
 };
 
 const checkAnswer = (): void => {
-  if (answer.value != "") {
+  if (answer.value != "" && displayedSyllable != null) {
     attempts++;
 
     if (displayedSyllable.romaji == answer.value.toLowerCase()) {
@@ -79,15 +105,52 @@ const displayRandom = (): void => {
 
   if (displayedSyllable != null) {
     kanaDisplay.innerHTML = displayedSyllable.kana;
+  } else {
+    kanaDisplay.innerHTML = "?";
   }
 };
 
 const getRandomSyllable = (): Syllable => {
-  return syllables[randomNumber(0, syllables.length - 1)];
+  const collections: Syllable[][] = [];
+
+  if (hiraganaCheck.checked) {
+    collections.push(hiragana);
+  }
+  if (hiraganaCheck.checked && dakutenCheck.checked) {
+    collections.push(hiraganaDakuten);
+  }
+  if (hiraganaCheck.checked && digraphCheck.checked) {
+    collections.push(hiraganaDigraphs);
+  }
+  if (hiraganaCheck.checked && dakutenCheck.checked && digraphCheck.checked) {
+    collections.push(hiraganaDakutenDigraphs);
+  }
+
+  if (katakanaCheck.checked) {
+    collections.push(katakana);
+  }
+  if (katakanaCheck.checked && dakutenCheck.checked) {
+    collections.push(katakanaDakuten);
+  }
+  if (katakanaCheck.checked && digraphCheck.checked) {
+    collections.push(katakanaDigraphs);
+  }
+  if (katakanaCheck.checked && dakutenCheck.checked && digraphCheck.checked) {
+    collections.push(katakanaDakutenDigraphs);
+  }
+
+  if (collections.length > 0) {
+    const collectionId = randomNumber(0, collections.length - 1);
+    const syllableId = randomNumber(0, collections[collectionId].length - 1);
+
+    return collections[collectionId][syllableId];
+  }
+  feedback.innerHTML = "Select kana to practice!";
+  return null;
 };
 
 const addHiragana = (): void => {
-  const hiragana: Syllable[] = [
+  hiragana = [
     new Syllable("あ", "a"),
     new Syllable("い", "i"),
     new Syllable("う", "u"),
@@ -137,11 +200,10 @@ const addHiragana = (): void => {
     new Syllable("を", "wo"),
     new Syllable("ん", "n"),
   ];
-  syllables = syllables.concat(hiragana);
 };
 
 const addHiraganaDakuten = (): void => {
-  const hiraganaDakuten: Syllable[] = [
+  hiraganaDakuten = [
     new Syllable("が", "ga"),
     new Syllable("ぎ", "gi"),
     new Syllable("ぐ", "gu"),
@@ -168,11 +230,10 @@ const addHiraganaDakuten = (): void => {
     new Syllable("ぺ", "pe"),
     new Syllable("ぽ", "po"),
   ];
-  syllables = syllables.concat(hiraganaDakuten);
 };
 
 const addHiraganaDigraphs = (): void => {
-  const hiraganaDigraphs: Syllable[] = [
+  hiraganaDigraphs = [
     new Syllable("きゃ", "kya"),
     new Syllable("きゅ", "kyu"),
     new Syllable("きょ", "kyo"),
@@ -194,6 +255,11 @@ const addHiraganaDigraphs = (): void => {
     new Syllable("りゃ", "rya"),
     new Syllable("りゅ", "ryu"),
     new Syllable("りょ", "ryo"),
+  ];
+};
+
+const addHiraganaDakutenDigraphs = (): void => {
+  hiraganaDakutenDigraphs = [
     new Syllable("ぎゃ", "gya"),
     new Syllable("ぎゅ", "gyu"),
     new Syllable("ぎょ", "gyo"),
@@ -210,11 +276,10 @@ const addHiraganaDigraphs = (): void => {
     new Syllable("ぴゅ", "pyu"),
     new Syllable("ぴょ", "pyo"),
   ];
-  syllables = syllables.concat(hiraganaDigraphs);
 };
 
 const addKatakana = (): void => {
-  const katakana: Syllable[] = [
+  katakana = [
     new Syllable("ア", "a"),
     new Syllable("イ", "i"),
     new Syllable("ウ", "u"),
@@ -264,11 +329,10 @@ const addKatakana = (): void => {
     new Syllable("ヲ", "wo"),
     new Syllable("ン", "n"),
   ];
-  syllables = syllables.concat(katakana);
 };
 
 const addKatakanaDakuten = (): void => {
-  const katakanaDakuten: Syllable[] = [
+  katakanaDakuten = [
     new Syllable("ガ", "ga"),
     new Syllable("ギ", "gi"),
     new Syllable("グ", "gu"),
@@ -295,11 +359,10 @@ const addKatakanaDakuten = (): void => {
     new Syllable("ペ", "pe"),
     new Syllable("ポ", "po"),
   ];
-  syllables = syllables.concat(katakanaDakuten);
 };
 
 const addKatakanaDigraphs = (): void => {
-  const katakanaDigraphs: Syllable[] = [
+  katakanaDigraphs = [
     new Syllable("キャ", "kya"),
     new Syllable("キュ", "kyu"),
     new Syllable("キョ", "kyo"),
@@ -321,6 +384,11 @@ const addKatakanaDigraphs = (): void => {
     new Syllable("リャ", "rya"),
     new Syllable("リュ", "ryu"),
     new Syllable("リョ", "ryo"),
+  ];
+};
+
+const addKatakanaDakutenDigraphs = (): void => {
+  katakanaDakutenDigraphs = [
     new Syllable("ギャ", "gya"),
     new Syllable("ギュ", "gyu"),
     new Syllable("ギョ", "gyo"),
@@ -337,7 +405,6 @@ const addKatakanaDigraphs = (): void => {
     new Syllable("ピュ", "pyu"),
     new Syllable("ピョ", "pyo"),
   ];
-  syllables = syllables.concat(katakanaDigraphs);
 };
 
 const randomNumber = (min, max) => {

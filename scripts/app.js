@@ -4,7 +4,18 @@ var kanaDisplay = (document.getElementById("kanaDisplay"));
 var answer = (document.getElementById("answer"));
 var feedback = (document.getElementById("feedback"));
 var next = (document.getElementById("next"));
-var syllables = [];
+var hiraganaCheck = (document.getElementById("hiraganaCheck"));
+var katakanaCheck = (document.getElementById("katakanaCheck"));
+var dakutenCheck = (document.getElementById("dakutenCheck"));
+var digraphCheck = (document.getElementById("digraphCheck"));
+var hiragana = [];
+var hiraganaDakuten = [];
+var hiraganaDigraphs = [];
+var hiraganaDakutenDigraphs = [];
+var katakana = [];
+var katakanaDakuten = [];
+var katakanaDigraphs = [];
+var katakanaDakutenDigraphs = [];
 var displayedSyllable;
 var attempts;
 // EVENTS
@@ -26,12 +37,17 @@ var Syllable = /** @class */ (function () {
 }());
 // FUNCTIONS
 var initialize = function () {
+    hiraganaCheck.checked = true;
+    dakutenCheck.checked = true;
+    digraphCheck.checked = true;
     addHiragana();
     addHiraganaDakuten();
     addHiraganaDigraphs();
+    addHiraganaDakutenDigraphs();
     addKatakana();
     addKatakanaDakuten();
     addKatakanaDigraphs();
+    addKatakanaDakutenDigraphs();
     reset();
 };
 var reset = function () {
@@ -42,7 +58,7 @@ var reset = function () {
     answer.focus();
 };
 var checkAnswer = function () {
-    if (answer.value != "") {
+    if (answer.value != "" && displayedSyllable != null) {
         attempts++;
         if (displayedSyllable.romaji == answer.value.toLowerCase()) {
             feedback.innerHTML = "Correct!";
@@ -63,12 +79,46 @@ var displayRandom = function () {
     if (displayedSyllable != null) {
         kanaDisplay.innerHTML = displayedSyllable.kana;
     }
+    else {
+        kanaDisplay.innerHTML = "?";
+    }
 };
 var getRandomSyllable = function () {
-    return syllables[randomNumber(0, syllables.length - 1)];
+    var collections = [];
+    if (hiraganaCheck.checked) {
+        collections.push(hiragana);
+    }
+    if (hiraganaCheck.checked && dakutenCheck.checked) {
+        collections.push(hiraganaDakuten);
+    }
+    if (hiraganaCheck.checked && digraphCheck.checked) {
+        collections.push(hiraganaDigraphs);
+    }
+    if (hiraganaCheck.checked && dakutenCheck.checked && digraphCheck.checked) {
+        collections.push(hiraganaDakutenDigraphs);
+    }
+    if (katakanaCheck.checked) {
+        collections.push(katakana);
+    }
+    if (katakanaCheck.checked && dakutenCheck.checked) {
+        collections.push(katakanaDakuten);
+    }
+    if (katakanaCheck.checked && digraphCheck.checked) {
+        collections.push(katakanaDigraphs);
+    }
+    if (katakanaCheck.checked && dakutenCheck.checked && digraphCheck.checked) {
+        collections.push(katakanaDakutenDigraphs);
+    }
+    if (collections.length > 0) {
+        var collectionId = randomNumber(0, collections.length - 1);
+        var syllableId = randomNumber(0, collections[collectionId].length - 1);
+        return collections[collectionId][syllableId];
+    }
+    feedback.innerHTML = "Select kana to practice!";
+    return null;
 };
 var addHiragana = function () {
-    var hiragana = [
+    hiragana = [
         new Syllable("あ", "a"),
         new Syllable("い", "i"),
         new Syllable("う", "u"),
@@ -118,10 +168,9 @@ var addHiragana = function () {
         new Syllable("を", "wo"),
         new Syllable("ん", "n"),
     ];
-    syllables = syllables.concat(hiragana);
 };
 var addHiraganaDakuten = function () {
-    var hiraganaDakuten = [
+    hiraganaDakuten = [
         new Syllable("が", "ga"),
         new Syllable("ぎ", "gi"),
         new Syllable("ぐ", "gu"),
@@ -148,10 +197,9 @@ var addHiraganaDakuten = function () {
         new Syllable("ぺ", "pe"),
         new Syllable("ぽ", "po"),
     ];
-    syllables = syllables.concat(hiraganaDakuten);
 };
 var addHiraganaDigraphs = function () {
-    var hiraganaDigraphs = [
+    hiraganaDigraphs = [
         new Syllable("きゃ", "kya"),
         new Syllable("きゅ", "kyu"),
         new Syllable("きょ", "kyo"),
@@ -173,6 +221,10 @@ var addHiraganaDigraphs = function () {
         new Syllable("りゃ", "rya"),
         new Syllable("りゅ", "ryu"),
         new Syllable("りょ", "ryo"),
+    ];
+};
+var addHiraganaDakutenDigraphs = function () {
+    hiraganaDakutenDigraphs = [
         new Syllable("ぎゃ", "gya"),
         new Syllable("ぎゅ", "gyu"),
         new Syllable("ぎょ", "gyo"),
@@ -189,10 +241,9 @@ var addHiraganaDigraphs = function () {
         new Syllable("ぴゅ", "pyu"),
         new Syllable("ぴょ", "pyo"),
     ];
-    syllables = syllables.concat(hiraganaDigraphs);
 };
 var addKatakana = function () {
-    var katakana = [
+    katakana = [
         new Syllable("ア", "a"),
         new Syllable("イ", "i"),
         new Syllable("ウ", "u"),
@@ -242,10 +293,9 @@ var addKatakana = function () {
         new Syllable("ヲ", "wo"),
         new Syllable("ン", "n"),
     ];
-    syllables = syllables.concat(katakana);
 };
 var addKatakanaDakuten = function () {
-    var katakanaDakuten = [
+    katakanaDakuten = [
         new Syllable("ガ", "ga"),
         new Syllable("ギ", "gi"),
         new Syllable("グ", "gu"),
@@ -272,10 +322,9 @@ var addKatakanaDakuten = function () {
         new Syllable("ペ", "pe"),
         new Syllable("ポ", "po"),
     ];
-    syllables = syllables.concat(katakanaDakuten);
 };
 var addKatakanaDigraphs = function () {
-    var katakanaDigraphs = [
+    katakanaDigraphs = [
         new Syllable("キャ", "kya"),
         new Syllable("キュ", "kyu"),
         new Syllable("キョ", "kyo"),
@@ -297,6 +346,10 @@ var addKatakanaDigraphs = function () {
         new Syllable("リャ", "rya"),
         new Syllable("リュ", "ryu"),
         new Syllable("リョ", "ryo"),
+    ];
+};
+var addKatakanaDakutenDigraphs = function () {
+    katakanaDakutenDigraphs = [
         new Syllable("ギャ", "gya"),
         new Syllable("ギュ", "gyu"),
         new Syllable("ギョ", "gyo"),
@@ -313,7 +366,6 @@ var addKatakanaDigraphs = function () {
         new Syllable("ピュ", "pyu"),
         new Syllable("ピョ", "pyo"),
     ];
-    syllables = syllables.concat(katakanaDigraphs);
 };
 var randomNumber = function (min, max) {
     return Math.floor(Math.random() * (+max + 1 - +min) + +min);
