@@ -347,7 +347,7 @@ const addKatakanaDakuten = (): void => {
     new Syllable("ヂ", "ji"),
     new Syllable("ヅ", "dzu"),
     new Syllable("デ", "de"),
-    new Syllable("ヂ", "do"),
+    new Syllable("ド", "do"),
     new Syllable("バ", "ba"),
     new Syllable("ビ", "bi"),
     new Syllable("ブ", "bu"),
