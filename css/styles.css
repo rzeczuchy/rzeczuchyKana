@@ -32,6 +32,8 @@ header #darkmodeButton {
 }
 
 button {
+  font-family: inherit;
+  font-size: inherit;
   border: 1px solid;
   background-color: inherit;
   color: inherit;
@@ -49,14 +51,10 @@ main div input[type=text] {
   background-color: inherit;
   color: inherit;
   padding: 1px;
-  font-family: "Arial", sans-serif;
-  font-size: 16px;
+  font-family: inherit;
+  font-size: inherit;
   max-width: 100px;
   text-align: center;
-}
-main div button {
-  font-family: "Arial", sans-serif;
-  font-size: 16px;
 }
 main #kanaDisplay {
   border: 1px solid;
