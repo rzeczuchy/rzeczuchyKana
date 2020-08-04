@@ -38,7 +38,7 @@ let katakanaDigraphs: Syllable[] = [];
 let katakanaDakutenDigraphs: Syllable[] = [];
 let displayedSyllable: Syllable;
 let attempts: number;
-let darkmode: boolean = false;
+let darkmode: boolean = document.body.classList.contains("dark-mode");
 
 // EVENTS
 window.onload = (): void => {

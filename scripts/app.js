@@ -19,7 +19,7 @@ var katakanaDigraphs = [];
 var katakanaDakutenDigraphs = [];
 var displayedSyllable;
 var attempts;
-var darkmode = false;
+var darkmode = document.body.classList.contains("dark-mode");
 // EVENTS
 window.onload = function () {
     initialize();
