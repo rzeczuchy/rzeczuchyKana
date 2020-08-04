@@ -1,6 +1,9 @@
 "use strict";
 
 // CONSTANTS, VARIABLES
+const darkmodeButton: HTMLButtonElement = <HTMLButtonElement>(
+  document.getElementById("darkmodeButton")
+);
 const kanaDisplay: HTMLDivElement = <HTMLDivElement>(
   document.getElementById("kanaDisplay")
 );
@@ -35,6 +38,7 @@ let katakanaDigraphs: Syllable[] = [];
 let katakanaDakutenDigraphs: Syllable[] = [];
 let displayedSyllable: Syllable;
 let attempts: number;
+let darkmode: boolean = false;
 
 // EVENTS
 window.onload = (): void => {
@@ -81,6 +85,7 @@ const reset = (): void => {
   feedback.innerHTML = "Check answer.";
   displayRandom();
   answer.focus();
+  updateDarkmodeButton();
 };
 
 const checkAnswer = (): void => {
@@ -147,6 +152,19 @@ const getRandomSyllable = (): Syllable => {
   }
   feedback.innerHTML = "Select kana to practice!";
   return null;
+};
+
+const toggleDarkMode = (): void => {
+  darkmode = !darkmode;
+  const body = document.body;
+  const html = document.documentElement;
+  body.classList.toggle("dark-mode");
+  html.classList.toggle("dark-mode");
+  updateDarkmodeButton();
+};
+
+const updateDarkmodeButton = (): void => {
+  darkmodeButton.innerHTML = darkmode ? "⛭" : "☽";
 };
 
 const addHiragana = (): void => {

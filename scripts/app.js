@@ -1,5 +1,6 @@
 "use strict";
 // CONSTANTS, VARIABLES
+var darkmodeButton = (document.getElementById("darkmodeButton"));
 var kanaDisplay = (document.getElementById("kanaDisplay"));
 var answer = (document.getElementById("answer"));
 var feedback = (document.getElementById("feedback"));
@@ -18,6 +19,7 @@ var katakanaDigraphs = [];
 var katakanaDakutenDigraphs = [];
 var displayedSyllable;
 var attempts;
+var darkmode = false;
 // EVENTS
 window.onload = function () {
     initialize();
@@ -56,6 +58,7 @@ var reset = function () {
     feedback.innerHTML = "Check answer.";
     displayRandom();
     answer.focus();
+    updateDarkmodeButton();
 };
 var checkAnswer = function () {
     if (answer.value != "" && displayedSyllable != null) {
@@ -116,6 +119,17 @@ var getRandomSyllable = function () {
     }
     feedback.innerHTML = "Select kana to practice!";
     return null;
+};
+var toggleDarkMode = function () {
+    darkmode = !darkmode;
+    var body = document.body;
+    var html = document.documentElement;
+    body.classList.toggle("dark-mode");
+    html.classList.toggle("dark-mode");
+    updateDarkmodeButton();
+};
+var updateDarkmodeButton = function () {
+    darkmodeButton.innerHTML = darkmode ? "⛭" : "☽";
 };
 var addHiragana = function () {
     hiragana = [

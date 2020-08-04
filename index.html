@@ -15,6 +15,14 @@
     <header>
       <img src="favicon.ico" alt="icon" />
       <span class="title">rzeczuchyKana</span>
+      <button
+        id="darkmodeButton"
+        type="button"
+        name="goodnight"
+        onclick="toggleDarkMode()"
+      >
+        ☽
+      </button>
     </header>
     <main>
       <div>
@@ -22,7 +30,7 @@
       </div>
       <div>
         <p>The above is read as:</p>
-        <input id="answer" type="text" />
+        <input id="answer" type="text" autocomplete="off" />
         <button type="button" name="check" onclick="checkAnswer()">
           Check
         </button>
@@ -58,7 +66,7 @@
           rel="noopener noreferrer"
           >rzeczuchy</a
         >
-        2020 ver 0.9.1
+        2020 ver 1.0
       </p>
     </footer>
     <script src="scripts/app.js"></script>
