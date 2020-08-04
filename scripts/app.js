@@ -29,6 +29,11 @@ answer.onkeyup = function (e) {
         checkAnswer();
     }
 };
+window.onkeydown = function (e) {
+    if (e.keyCode == 8 && document.activeElement != answer) {
+        e.preventDefault();
+    }
+};
 // CLASSES
 var Syllable = /** @class */ (function () {
     function Syllable(kana, romaji) {

@@ -44,9 +44,16 @@ let darkmode: boolean = document.body.classList.contains("dark-mode");
 window.onload = (): void => {
   initialize();
 };
+
 answer.onkeyup = (e: KeyboardEvent): void => {
   if (e.key == "Enter") {
     checkAnswer();
+  }
+};
+
+window.onkeydown = (e: KeyboardEvent): void => {
+  if (e.keyCode == 8 && document.activeElement != answer) {
+    e.preventDefault();
   }
 };
 
